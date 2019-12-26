@@ -1,12 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
 import { FoodService } from './food.service';
 
 @Controller('food')
 export class FoodController {
-  constructor(private readonly appService: FoodService) {}
+  constructor(private readonly foodService: FoodService) {}
 
-  @Get('findAll')
-  getHello() {
-    return this.appService.findAll();
+  @Get('getFoodList')
+  findAll() {
+    return this.foodService.findAll();
+  }
+  @Post("create")
+  createFood(@Req() req){
+      req
   }
 }
