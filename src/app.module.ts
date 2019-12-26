@@ -2,14 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// const mysql = require('mysql');
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'Ff.131517',
-//   database: 'test',
-// });
-// connection.connect();
+import { Photo } from './photo/photo.entity';
+import { PhotoModule } from './photo/photo.module';
+import { FoodModule } from './food/food.module';
+import { Food } from './food/food.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,11 +15,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'Ff.131517',
       database: 'foods',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [Photo, Food],
       synchronize: true,
     }),
+    PhotoModule,
+    FoodModule,
   ],
   controllers: [AppController],
   providers: [AppService],
+
 })
-export class AppModule {}
+export class AppModule {
+  // constructor() {}
+}
