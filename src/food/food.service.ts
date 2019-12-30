@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Food } from './food.entity';
@@ -10,10 +10,15 @@ export class FoodService {
     private readonly foodRepository: Repository<Food>,
   ) {}
 
-  findAll(): Promise<Food[]> {
+  getList(): Promise<Food[]> {
     return this.foodRepository.find();
   }
-  createFood(param: Food) {
-    return this.foodRepository.insert(param);
+  insert(param: Food) {
+    return   this.foodRepository.insert(param);
+  }
+ async del(id: number) {
+     let target =await this.foodRepository.findOne(id)
+     new Logger().log(target)
+     await this.foodRepository.remove(target)
   }
 }

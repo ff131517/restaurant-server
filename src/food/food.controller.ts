@@ -5,17 +5,20 @@ import { Request } from 'express';
 export class FoodController {
   constructor(private readonly foodService: FoodService) {}
 
-  @Get('getFoodList')
-  findAll() {
-    return this.foodService.findAll();
+  @Get('getList')
+  getList() {
+    return this.foodService.getList();
   }
-  @Post('createFood')
- async createFood(@Req() request: Request) {
-  const logger = new Logger();
-  logger.log(request.body);
-  await this.foodService.createFood(request.body);
-  return {
-      msg: 'success',
-    };
+  @Post('insert')
+  async createFood(@Req() request: Request) {
+    const logger = new Logger();
+    logger.log(request.body);
+    await this.foodService.insert(request.body);
+  }
+  @Post('delete')
+  async delete(@Req() request: Request) {
+    const logger = new Logger();
+    logger.log(request.body);
+    await this.foodService.del(request.body);
   }
 }
