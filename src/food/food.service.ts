@@ -7,10 +7,13 @@ import { Food } from './food.entity';
 export class FoodService {
   constructor(
     @InjectRepository(Food)
-    private readonly photoRepository: Repository<Food>,
+    private readonly foodRepository: Repository<Food>,
   ) {}
 
   findAll(): Promise<Food[]> {
-    return this.photoRepository.find();
+    return this.foodRepository.find();
+  }
+  createFood(param: Food) {
+    return this.foodRepository.insert(param);
   }
 }

@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, Post, Req, Logger } from '@nestjs/common';
 import { FoodService } from './food.service';
-
+import { Request } from 'express';
 @Controller('food')
 export class FoodController {
   constructor(private readonly foodService: FoodService) {}
@@ -9,8 +9,13 @@ export class FoodController {
   findAll() {
     return this.foodService.findAll();
   }
-  @Post("create")
-  createFood(@Req() req){
-      req
+  @Post('createFood')
+ async createFood(@Req() request: Request) {
+  const logger = new Logger();
+  logger.log(request.body);
+  await this.foodService.createFood(request.body);
+  return {
+      msg: 'success',
+    };
   }
 }
