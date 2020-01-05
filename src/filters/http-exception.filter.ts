@@ -20,7 +20,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       data: {
      	 error: message,
     	}, // 获取全部的错误信息
-      message: '请求失败',
+      message: '服务内部错误',
       code: 1, // 自定义code
       url: request.originalUrl, // 错误的url地址
     };
