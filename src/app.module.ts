@@ -2,10 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Photo } from './photo/photo.entity';
-import { PhotoModule } from './photo/photo.module';
-import { FoodModule } from './food/food.module';
-import { Food } from './food/food.entity';
+import { FoodModule } from './modules/food/food.module';
+import { Food } from './modules/food/food.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,10 +13,9 @@ import { Food } from './food/food.entity';
       username: 'root',
       password: 'Ff.131517',
       database: 'foods',
-      entities: [Photo, Food],
+      entities: [Food],
       synchronize: true,
     }),
-    PhotoModule,
     FoodModule,
   ],
   controllers: [AppController],
