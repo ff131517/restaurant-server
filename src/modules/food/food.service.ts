@@ -13,15 +13,15 @@ export class FoodService {
   getList(): Promise<Food[]> {
     return this.foodRepository.find();
   }
-   getDetail(id: number): Promise<Food[]> {
-    return  this.foodRepository.find({id});
+  getDetail(id: number): Promise<Food> {
+    return  this.foodRepository.findOne({ id });
   }
   insert(param: Food) {
-    return   this.foodRepository.insert(param);
+    return this.foodRepository.insert(param);
   }
- async del(id: number) {
-     const target = await this.foodRepository.findOne(id);
-     new Logger().log(target);
-     await this.foodRepository.remove(target);
+  async del(id: number) {
+    const target = await this.foodRepository.findOne(id);
+    new Logger().log(target);
+    await this.foodRepository.remove(target);
   }
 }
